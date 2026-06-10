@@ -515,6 +515,30 @@ export default function App() {
 
   return (
     <div className="App">
+      
+      {/* 1. NAYA START BUTTON (Mobile ke liye) */}
+      {!hasStarted && (
+        <div style={{
+          position: 'absolute', top: 0, left: 0, width: '100%', height: '100%',
+          backgroundColor: '#000000', zIndex: 9999,
+          display: 'flex', justifyContent: 'center', alignItems: 'center'
+        }}>
+          <button
+            onClick={() => {
+              playBackgroundMusic();
+              setHasStarted(true);
+            }}
+            style={{
+              padding: '15px 30px', fontSize: '20px', backgroundColor: '#ff4a5a',
+              color: 'white', border: 'none', borderRadius: '25px', cursor: 'pointer',
+              boxShadow: '0 4px 15px rgba(255, 74, 90, 0.4)'
+            }}
+          >
+            Click for Surprise! ❤️
+          </button>
+        </div>
+      )}
+
       <div
         className="background-overlay"
         style={{ opacity: backgroundOpacity }}
@@ -538,9 +562,21 @@ export default function App() {
           })}
         </div>
       </div>
+      
+      {/* 2. CANDLE BUJHANE KE LIYE BUTTON (Mobile pe tap karne ke liye) */}
       {hasAnimationCompleted && isCandleLit && (
-        <div className="hint-overlay">press space to blow out the candle</div>
+        <div 
+          className="hint-overlay" 
+          onClick={() => {
+            setIsCandleLit(false);
+            setFireworksActive(true);
+          }}
+          style={{ cursor: 'pointer', pointerEvents: 'auto', zIndex: 1000 }}
+        >
+          Tap here to blow out the candle 🎂💨
+        </div>
       )}
+
       <Canvas
         gl={{ alpha: true }}
         style={{ background: "transparent" }}
